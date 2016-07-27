@@ -1,0 +1,25 @@
+<% if not @control_enable.nil? -%>
+
+remote-control:
+	control-enable: <%= @control_enable == true ? 'yes' : 'no' %>
+<% if @control_interface -%>
+<%   @control_interface.each do |i| -%>
+	control-interface: <%= i %>
+<%   end -%>
+<% end -%>
+<% if @control_port -%>
+	control-port: <%= @control_port %>
+<% end -%>
+<% if @server_key_file -%>
+	server-key-file: "<%= @server_key_file %>"
+<% end -%>
+<% if @server_cert_file -%>
+	server-cert-file: "<%= @server_cert_file %>"
+<% end -%>
+<% if @control_key_file -%>
+	control-key-file: "<%= @control_key_file %>"
+<% end -%>
+<% if @control_cert_file -%>
+	control-cert-file: "<%= @control_cert_file %>"
+<% end -%>
+<% end -%>

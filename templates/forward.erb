@@ -1,0 +1,16 @@
+
+forward-zone:
+	name: "<%= @name %>"
+<% if @host -%>
+<%   @host.each do |i| -%>
+	forward-host: <%= i %>
+<%   end -%>
+<% end -%>
+<% if @addr -%>
+<%   @addr.each do |i| -%>
+	forward-addr: <%= i %>
+<%   end -%>
+<% end -%>
+<% if not @first.nil? -%>
+	forward-first: <%= @first == true ? 'yes' : 'no' %>
+<% end -%>
