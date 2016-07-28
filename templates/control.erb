@@ -10,6 +10,9 @@ remote-control:
 <% if @control_port -%>
 	control-port: <%= @control_port %>
 <% end -%>
+<% if not @control_use_cert.nil? -%>
+	control-use-cert: <%= @control_use_cert == true ? 'yes' : 'no' %>
+<% end -%>
 <% if @server_key_file -%>
 	server-key-file: "<%= @server_key_file %>"
 <% end -%>

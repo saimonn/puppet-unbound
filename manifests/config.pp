@@ -15,6 +15,7 @@ class unbound::config {
   $control_interface            = $::unbound::control_interface
   $control_key_file             = $::unbound::control_key_file
   $control_port                 = $::unbound::control_port
+  $control_use_cert             = $::unbound::control_use_cert
   $del_holddown                 = $::unbound::del_holddown
   $delay_close                  = $::unbound::delay_close
   $directory                    = $::unbound::directory

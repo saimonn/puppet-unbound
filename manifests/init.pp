@@ -22,6 +22,7 @@ class unbound (
   $control_interface            = undef,
   $control_key_file             = $::unbound::params::control_key_file,
   $control_port                 = undef,
+  $control_use_cert             = undef,
   $del_holddown                 = undef,
   $delay_close                  = undef,
   $directory                    = undef,
@@ -142,7 +143,7 @@ class unbound (
     fail('')
   }
   if $access_control {
-    validate_unbound_acl($access_control, ['allow', 'allow_snoop', 'deny', 'refuse'], true)
+    validate_unbound_acl($access_control, ['allow', 'allow_snoop', 'deny', 'deny_non_local', 'refuse', 'refuse_non_local'], true)
   }
   if $add_holddown {
     validate_integer($add_holddown, '', 0)
@@ -180,6 +181,9 @@ class unbound (
   }
   if $control_port {
     validate_integer($control_port, 65535, 0)
+  }
+  if $control_use_cert {
+    validate_bool($control_use_cert)
   }
   if $del_holddown {
     validate_integer($del_holddown, '', 0)
