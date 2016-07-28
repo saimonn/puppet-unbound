@@ -815,9 +815,11 @@ class { '::unbound':
 
 #### Public Defined Types
 
-* [`unbound::forward`](#defined-type-unboundforward):
-* [`unbound::local`](#defined-type-unboundlocal):
-* [`unbound::stub`](#defined-type-unboundstub):
+* [`unbound::forward`](#defined-type-unboundforward): Handles defining forward
+  zones.
+* [`unbound::local`](#defined-type-unboundlocal): Handles defining local zone
+  data.
+* [`unbound::stub`](#defined-type-unboundstub): Handles defining stub zones.
 
 ### Functions
 
