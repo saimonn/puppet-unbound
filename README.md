@@ -102,6 +102,14 @@ Array of access control entries. Each entry is an IP netblock followed by one
 of `deny`, `refuse`, `allow`, `allow_snoop`, `deny_non_local` or
 `refuse_non_local`.
 
+```puppet
+class { '::unbound':
+  access_control => [
+    '192.0.2.0/24 allow',
+  ],
+}
+```
+
 ##### `add_holddown`
 
 Add new trust anchors only after they've been visible for this amount of time.
@@ -381,6 +389,15 @@ An array of strings of the form `permit|avoid port[-port]` which will be
 converted into `outgoing-port-permit` and `outgoing-port-avoid` configuration
 directives with the same order.
 
+```puppet
+class { '::unbound':
+  outgoing_port => [
+    'avoid 0-32767',
+    'avoid 65001-65535',
+  ],
+}
+```
+
 ##### `outgoing_range`
 
 Number of ports to open.
@@ -431,6 +448,14 @@ The ratelimit is in queries per second that are allowed.
 Array of domains to override the global ratelimit for a domain name that ends
 in this name.
 
+```puppet
+class { '::unbound':
+  ratelimit_below_domain => [
+    'example.com 1000',
+  ],
+}
+```
+
 ##### `ratelimit_factor`
 
 Set the amount of queries to rate limit when the limit is exceeded.
@@ -439,6 +464,14 @@ Set the amount of queries to rate limit when the limit is exceeded.
 
 Array of domains to override the global ratelimit for a domain that matches
 exactly.
+
+```puppet
+class { '::unbound':
+  ratelimit_for_domain => [
+    'example.com 1000',
+  ],
+}
+```
 
 ##### `ratelimit_size`
 
@@ -670,7 +703,7 @@ Try direct if the query fails against the configured nameservers.
 Validate an array of IP addresses. An optional second parameter specifies any
 strings that are valid actions to follow the IP address. An optional final
 boolean parameter specifies whether just single IP addresses are accepted
-(the default) or CIDR ranges aer also accepted.
+(the default) or CIDR ranges are also accepted.
 
 ~~~
 validate_unbound_acl(['1.2.3.0/24'], [], true)
