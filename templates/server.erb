@@ -5,11 +5,11 @@ server:
 <% if @statistics_interval -%>
 	statistics-interval: <%= @statistics_interval %>
 <% end -%>
-<% if not @statistics_cumulative.nil? -%>
-	statistics-cumulative: <%= @statistics_cumulative == true ? 'yes' : 'no' %>
+<% unless @statistics_cumulative.nil? -%>
+	statistics-cumulative: <%= @statistics_cumulative ? 'yes' : 'no' %>
 <% end -%>
-<% if not @extended_statistics.nil? -%>
-	extended-statistics: <%= @extended_statistics == true ? 'yes' : 'no' %>
+<% unless @extended_statistics.nil? -%>
+	extended-statistics: <%= @extended_statistics ? 'yes' : 'no' %>
 <% end -%>
 <% if @num_threads -%>
 	num-threads: <%= @num_threads %>
@@ -22,8 +22,8 @@ server:
 	interface: <%= i %>
 <%   end -%>
 <% end -%>
-<% if not @interface_automatic.nil? -%>
-	interface-automatic: <%= @interface_automatic == true ? 'yes' : 'no' %>
+<% unless @interface_automatic.nil? -%>
+	interface-automatic: <%= @interface_automatic ? 'yes' : 'no' %>
 <% end -%>
 <% if @outgoing_interface -%>
 <%   @outgoing_interface.each do |i| -%>
@@ -51,14 +51,14 @@ server:
 <% if @so_sndbuf -%>
 	so-sndbuf: <%= @so_sndbuf %>
 <% end -%>
-<% if not @so_reuseport.nil? -%>
-	so-reuseport: <%= @so_reuseport == true ? 'yes' : 'no' %>
+<% unless @so_reuseport.nil? -%>
+	so-reuseport: <%= @so_reuseport ? 'yes' : 'no' %>
 <% end -%>
-<% if not @ip_transparent.nil? -%>
-	ip-transparent: <%= @ip_transparent == true ? 'yes' : 'no' %>
+<% unless @ip_transparent.nil? -%>
+	ip-transparent: <%= @ip_transparent ? 'yes' : 'no' %>
 <% end -%>
-<% if not @ip_freebind.nil? -%>
-	ip-freebind: <%= @ip_freebind == true ? 'yes' : 'no' %>
+<% unless @ip_freebind.nil? -%>
+	ip-freebind: <%= @ip_freebind ? 'yes' : 'no' %>
 <% end -%>
 <% if @edns_buffer_size -%>
 	edns-buffer-size: <%= @edns_buffer_size %>
@@ -111,20 +111,20 @@ server:
 <% if @infra_cache_numhosts -%>
 	infra-cache-numhosts: <%= @infra_cache_numhosts %>
 <% end -%>
-<% if not @do_ip4.nil? -%>
-	do-ip4: <%= @do_ip4 == true ? 'yes' : 'no' %>
+<% unless @do_ip4.nil? -%>
+	do-ip4: <%= @do_ip4 ? 'yes' : 'no' %>
 <% end -%>
-<% if not @do_ip6.nil? -%>
-	do-ip6: <%= @do_ip6 == true ? 'yes' : 'no' %>
+<% unless @do_ip6.nil? -%>
+	do-ip6: <%= @do_ip6 ? 'yes' : 'no' %>
 <% end -%>
-<% if not @do_udp.nil? -%>
-	do-udp: <%= @do_udp == true ? 'yes' : 'no' %>
+<% unless @do_udp.nil? -%>
+	do-udp: <%= @do_udp ? 'yes' : 'no' %>
 <% end -%>
-<% if not @do_tcp.nil? -%>
-	do-tcp: <%= @do_tcp == true ? 'yes' : 'no' %>
+<% unless @do_tcp.nil? -%>
+	do-tcp: <%= @do_tcp ? 'yes' : 'no' %>
 <% end -%>
-<% if not @tcp_upstream.nil? -%>
-	tcp-upstream: <%= @tcp_upstream == true ? 'yes' : 'no' %>
+<% unless @tcp_upstream.nil? -%>
+	tcp-upstream: <%= @tcp_upstream ? 'yes' : 'no' %>
 <% end -%>
 <% if @tcp_mss -%>
 	tcp-mss: <%= @tcp_mss %>
@@ -149,11 +149,11 @@ server:
 <% if @logfile -%>
 	logfile: "<%= @logfile %>"
 <% end -%>
-<% if not @use_syslog.nil? -%>
-	use-syslog: <%= @use_syslog == true ? 'yes' : 'no' %>
+<% unless @use_syslog.nil? -%>
+	use-syslog: <%= @use_syslog ? 'yes' : 'no' %>
 <% end -%>
-<% if not @log_time_ascii.nil? -%>
-	log-time-ascii: <%= @log_time_ascii == true ? 'yes' : 'no' %>
+<% unless @log_time_ascii.nil? -%>
+	log-time-ascii: <%= @log_time_ascii ? 'yes' : 'no' %>
 <% end -%>
 <% if @pidfile -%>
 	pidfile: "<%= @pidfile %>"
@@ -161,11 +161,11 @@ server:
 <% if @root_hints -%>
 	root-hints: "<%= @root_hints %>"
 <% end -%>
-<% if not @hide_identity.nil? -%>
-	hide-identity: <%= @hide_identity == true ? 'yes' : 'no' %>
+<% unless @hide_identity.nil? -%>
+	hide-identity: <%= @hide_identity ? 'yes' : 'no' %>
 <% end -%>
-<% if not @hide_version.nil? -%>
-	hide-version: <%= @hide_version == true ? 'yes' : 'no' %>
+<% unless @hide_version.nil? -%>
+	hide-version: <%= @hide_version ? 'yes' : 'no' %>
 <% end -%>
 <% if @identiy -%>
 	identity: "<%= @identity %>"
@@ -176,32 +176,32 @@ server:
 <% if @target_fetch_policy -%>
 	target-fetch-policy: "<%= @target_fetch_policy.split(/\s+/).join(' ') %>"
 <% end -%>
-<% if not @harden_short_bufsize.nil? -%>
-	harden-short-bufsize: <%= @harden_short_bufsize == true ? 'yes' : 'no' %>
+<% unless @harden_short_bufsize.nil? -%>
+	harden-short-bufsize: <%= @harden_short_bufsize ? 'yes' : 'no' %>
 <% end -%>
-<% if not @harden_large_queries.nil? -%>
-	harden-large-queries: <%= @harden_large_queries == true ? 'yes' : 'no' %>
+<% unless @harden_large_queries.nil? -%>
+	harden-large-queries: <%= @harden_large_queries ? 'yes' : 'no' %>
 <% end -%>
-<% if not @harden_glue.nil? -%>
-	harden-glue: <%= @harden_glue == true ? 'yes' : 'no' %>
+<% unless @harden_glue.nil? -%>
+	harden-glue: <%= @harden_glue ? 'yes' : 'no' %>
 <% end -%>
-<% if not @harden_dnssec_stripped.nil? -%>
-	harden-dnssec-stripped: <%= @harden_dnssec_stripped == true ? 'yes' : 'no' %>
+<% unless @harden_dnssec_stripped.nil? -%>
+	harden-dnssec-stripped: <%= @harden_dnssec_stripped ? 'yes' : 'no' %>
 <% end -%>
-<% if not @harden_below_nxdomain.nil? -%>
-	harden-below-nxdomain: <%= @harden_below_nxdomain == true ? 'yes' : 'no' %>
+<% unless @harden_below_nxdomain.nil? -%>
+	harden-below-nxdomain: <%= @harden_below_nxdomain ? 'yes' : 'no' %>
 <% end -%>
-<% if not @harden_referral_path.nil? -%>
-	harden-referral-path: <%= @harden_referral_path == true ? 'yes' : 'no' %>
+<% unless @harden_referral_path.nil? -%>
+	harden-referral-path: <%= @harden_referral_path ? 'yes' : 'no' %>
 <% end -%>
-<% if not @harden_algo_downgrade.nil? -%>
-	harden-algo-downgrade: <%= @harden_algo_downgrade == true ? 'yes' : 'no' %>
+<% unless @harden_algo_downgrade.nil? -%>
+	harden-algo-downgrade: <%= @harden_algo_downgrade ? 'yes' : 'no' %>
 <% end -%>
-<% if not @qname_minimisation.nil? -%>
-	qname-minimisation: <%= @qname_minimisation == true ? 'yes' : 'no' %>
+<% unless @qname_minimisation.nil? -%>
+	qname-minimisation: <%= @qname_minimisation ? 'yes' : 'no' %>
 <% end -%>
-<% if not @use_caps_for_id.nil? -%>
-	use-caps-for-id: <%= @use_caps_for_id == true ? 'yes' : 'no' %>
+<% unless @use_caps_for_id.nil? -%>
+	use-caps-for-id: <%= @use_caps_for_id ? 'yes' : 'no' %>
 <% end -%>
 <% if @caps_whitelist -%>
 <%   @caps_whitelist.each do |i| -%>
@@ -226,23 +226,23 @@ server:
 	do-not-query-address: <%= i %>
 <%   end -%>
 <% end -%>
-<% if not @do_not_query_localhost.nil? -%>
-	do-not-query-localhost: <%= @do_not_query_localhost == true ? 'yes' : 'no' %>
+<% unless @do_not_query_localhost.nil? -%>
+	do-not-query-localhost: <%= @do_not_query_localhost ? 'yes' : 'no' %>
 <% end -%>
-<% if not @prefetch.nil? -%>
-	prefetch: <%= @prefetch == true ? 'yes' : 'no' %>
+<% unless @prefetch.nil? -%>
+	prefetch: <%= @prefetch ? 'yes' : 'no' %>
 <% end -%>
-<% if not @prefetch_key.nil? -%>
-	prefetch-key: <%= @prefetch_key == true ? 'yes' : 'no' %>
+<% unless @prefetch_key.nil? -%>
+	prefetch-key: <%= @prefetch_key ? 'yes' : 'no' %>
 <% end -%>
-<% if not @rrset_roundrobin.nil? -%>
-	rrset-roundrobin: <%= @rrset_roundrobin == true ? 'yes' : 'no' %>
+<% unless @rrset_roundrobin.nil? -%>
+	rrset-roundrobin: <%= @rrset_roundrobin ? 'yes' : 'no' %>
 <% end -%>
-<% if not @minimal_responses.nil? -%>
-	minimal-responses: <%= @minimal_responses == true ? 'yes' : 'no' %>
+<% unless @minimal_responses.nil? -%>
+	minimal-responses: <%= @minimal_responses ? 'yes' : 'no' %>
 <% end -%>
-<% if not @disable_dnssec_lame_check.nil? -%>
-	ďisable-dnssec-lame-check: <%= @disable_dnssec_lame_check == true ? 'yes' : 'no' %>
+<% unless @disable_dnssec_lame_check.nil? -%>
+	ďisable-dnssec-lame-check: <%= @disable_dnssec_lame_check ? 'yes' : 'no' %>
 <% end -%>
 	module-config: "<%= @module_config.join(' ') %>"
 <% if @trust_anchor_file -%>
@@ -274,11 +274,11 @@ server:
 <% if @val_sig_skew_max -%>
 	val-sig-skew-max: <%= @val_sig_skew_max %>
 <% end -%>
-<% if not @val_clean_additional.nil? -%>
-	val-clean-additional: <%= @val_clean_additional == true ? 'yes' : 'no' %>
+<% unless @val_clean_additional.nil? -%>
+	val-clean-additional: <%= @val_clean_additional ? 'yes' : 'no' %>
 <% end -%>
-<% if not @val_permissive_mode.nil? -%>
-	val-permissive-mode: <%= @val_permissive_mode == true ? 'yes' : 'no' %>
+<% unless @val_permissive_mode.nil? -%>
+	val-permissive-mode: <%= @val_permissive_mode ? 'yes' : 'no' %>
 <% end -%>
 <% if @val_log_level -%>
 	val-log-level: <%= @val_log_level %>
@@ -295,8 +295,8 @@ server:
 <% if @keep_missing -%>
 	keep-missing: <%= @keep_missing %>
 <% end -%>
-<% if not @permit_small_holddown.nil? -%>
-	permit-small-holddown: <%= @permit_small_holddown == true ? 'yes' : 'no' %>
+<% unless @permit_small_holddown.nil? -%>
+	permit-small-holddown: <%= @permit_small_holddown ? 'yes' : 'no' %>
 <% end -%>
 <% if @key_cache_size -%>
 	key-cache-size: <%= @key_cache_size %>
@@ -307,11 +307,11 @@ server:
 <% if @neg_cache_size -%>
 	neg-cache-size: <%= @neg_cache_size %>
 <% end -%>
-<% if not @unblock_lan_zones.nil? -%>
-	unblock-lan-zones: <%= @unblock_lan_zones == true ? 'yes' : 'no' %>
+<% unless @unblock_lan_zones.nil? -%>
+	unblock-lan-zones: <%= @unblock_lan_zones ? 'yes' : 'no' %>
 <% end -%>
-<% if not @insecure_lan_zones.nil? -%>
-	insecure-lan-zones: <%= @insecure_lan_zones == true ? 'yes' : 'no' %>
+<% unless @insecure_lan_zones.nil? -%>
+	insecure-lan-zones: <%= @insecure_lan_zones ? 'yes' : 'no' %>
 <% end -%>
 <% if @ssl_service_key -%>
 	ssl-service-key: "<%= @ssl_service_key %>"
@@ -322,14 +322,14 @@ server:
 <% if @ssl_port -%>
 	ssl-port: <%= @ssl_port %>
 <% end -%>
-<% if not @ssl_upstream.nil? -%>
-	ssl-upstream: <%= @ssl_upstream == true ? 'yes' : 'no' %>
+<% unless @ssl_upstream.nil? -%>
+	ssl-upstream: <%= @ssl_upstream ? 'yes' : 'no' %>
 <% end -%>
 <% if @dns64_prefix -%>
 	dns64-prefix: <%= @dns64_prefix %>
 <% end -%>
-<% if not @dns64_synthall.nil? -%>
-	dns64-synthall: <%= @dns64_synthall == true ? 'yes' : 'no' %>
+<% unless @dns64_synthall.nil? -%>
+	dns64-synthall: <%= @dns64_synthall ? 'yes' : 'no' %>
 <% end -%>
 <% if @ratelimit -%>
 	ratelimit: <%= @ratelimit %>
@@ -351,5 +351,33 @@ server:
 <% if @ratelimit_below_domain -%>
 <%   @ratelimit_below_domain.each do |i| -%>
 	ratelimit-below-domain: <%= i.split(/\s+/).join(' ') %>
+<%   end -%>
+<% end -%>
+<% unless @control_enable.nil? -%>
+
+remote-control:
+	control-enable: <%= @control_enable ? 'yes' : 'no' %>
+<%   if @control_interface -%>
+<%     @control_interface.each do |i| -%>
+	control-interface: <%= i %>
+<%     end -%>
+<%   end -%>
+<%   if @control_port -%>
+	control-port: <%= @control_port %>
+<%   end -%>
+<%   unless @control_use_cert.nil? -%>
+	control-use-cert: <%= @control_use_cert ? 'yes' : 'no' %>
+<%   end -%>
+<%   if @server_key_file -%>
+	server-key-file: "<%= @server_key_file %>"
+<%   end -%>
+<%   if @server_cert_file -%>
+	server-cert-file: "<%= @server_cert_file %>"
+<%   end -%>
+<%   if @control_key_file -%>
+	control-key-file: "<%= @control_key_file %>"
+<%   end -%>
+<%   if @control_cert_file -%>
+	control-cert-file: "<%= @control_cert_file %>"
 <%   end -%>
 <% end -%>

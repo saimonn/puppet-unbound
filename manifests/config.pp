@@ -250,14 +250,8 @@ class unbound::config {
   }
 
   ::concat::fragment { 'unbound server':
-    content => template('unbound/server.erb'),
+    content => template("${module_name}/server.erb"),
     order   => '01',
-    target  => "${conf_dir}/unbound.conf",
-  }
-
-  ::concat::fragment { 'unbound control':
-    content => template('unbound/control.erb'),
-    order   => '20',
     target  => "${conf_dir}/unbound.conf",
   }
 

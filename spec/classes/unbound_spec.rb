@@ -34,7 +34,6 @@ describe 'unbound' do
       it { should contain_class('unbound::install') }
       it { should contain_class('unbound::params') }
       it { should contain_class('unbound::service') }
-      it { should contain_concat__fragment('unbound control') }
       it { should contain_concat__fragment('unbound server') }
       it { should contain_exec('unbound-control-setup') }
       it { should contain_service('unbound') }
