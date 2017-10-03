@@ -1,4 +1,4 @@
-#
+# @!visibility private
 class unbound::params {
 
   $control_enable = true
@@ -9,7 +9,7 @@ class unbound::params {
 
   case $::osfamily {
     'RedHat': {
-      $chroot                 = '' # lint:ignore:empty_string_assignment
+      $chroot                 = undef
       $conf_dir               = '/etc/unbound'
       $group                  = 'unbound'
       $manage_package         = true
@@ -35,7 +35,7 @@ class unbound::params {
       $username               = '_unbound'
     }
     default: {
-      fail("The ${module_name} module is not supported on an ${::osfamily} based system.") # lint:ignore:80chars
+      fail("The ${module_name} module is not supported on an ${::osfamily} based system.")
     }
   }
 
