@@ -1,6 +1,6 @@
 
 stub-zone:
-	name: "<%= @name %>"
+	name: "<%= @zone %>"
 <% if @host -%>
 <%   @host.each do |i| -%>
 	stub-host: <%= i %>
@@ -8,12 +8,12 @@ stub-zone:
 <% end -%>
 <% if @addr -%>
 <%   @addr.each do |i| -%>
-	stub-addr: <%= i %>
+	stub-addr: <%= Array(i).join('@') %>
 <%   end -%>
 <% end -%>
-<% if not @prime.nil? -%>
-	stub-prime: <%= @prime == true ? 'yes' : 'no' %>
+<% unless @prime.nil? -%>
+	stub-prime: <%= @prime ? 'yes' : 'no' %>
 <% end -%>
-<% if not @first.nil? -%>
-	stub-first: <%= @first == true ? 'yes' : 'no' %>
+<% unless @first.nil? -%>
+	stub-first: <%= @first ? 'yes' : 'no' %>
 <% end -%>
