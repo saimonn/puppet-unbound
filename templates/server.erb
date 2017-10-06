@@ -18,25 +18,24 @@ server:
 	port: <%= @port %>
 <% end -%>
 <% if @interface -%>
-<%   @interface.each do |i| -%>
-	interface: <%= i %>
+<%   @interface.each do |x| -%>
+	interface: <%= Array(x).join('@') %>
 <%   end -%>
 <% end -%>
 <% unless @interface_automatic.nil? -%>
 	interface-automatic: <%= @interface_automatic ? 'yes' : 'no' %>
 <% end -%>
 <% if @outgoing_interface -%>
-<%   @outgoing_interface.each do |i| -%>
-	outgoing-interface: <%= i %>
+<%   @outgoing_interface.each do |x| -%>
+	outgoing-interface: <%= x %>
 <%   end -%>
 <% end -%>
 <% if @outgoing_range -%>
 	outgoing-range: <%= @outgoing_range %>
 <% end -%>
 <% if @outgoing_port -%>
-<%   @outgoing_port.each do |i| -%>
-<%     x = i.split(/\s+/) -%>
-	outgoing-port-<%= x[0].downcase %>: <%= x[1] %>
+<%   @outgoing_port.each do |x| -%>
+	outgoing-port-<%= x[0] %>: <%= x[1] %><%= "-#{x[2]}" if x.size > 2 %>
 <%   end -%>
 <% end -%>
 <% if @outgoing_num_tcp -%>
@@ -134,7 +133,7 @@ server:
 <% end -%>
 <% if @access_control -%>
 <%   @access_control.each do |i| -%>
-	access-control: <%= i.split(/\s+/).join(' ') %>
+	access-control: <%= i.join(' ') %>
 <%   end -%>
 <% end -%>
 <% if @chroot -%>
@@ -174,7 +173,7 @@ server:
 	version: "<%= @version %>"
 <% end -%>
 <% if @target_fetch_policy -%>
-	target-fetch-policy: "<%= @target_fetch_policy.split(/\s+/).join(' ') %>"
+	target-fetch-policy: "<%= @target_fetch_policy.join(' ') %>"
 <% end -%>
 <% unless @harden_short_bufsize.nil? -%>
 	harden-short-bufsize: <%= @harden_short_bufsize ? 'yes' : 'no' %>
@@ -284,7 +283,7 @@ server:
 	val-log-level: <%= @val_log_level %>
 <% end -%>
 <% if @val_nsec3_keysize_iterations -%>
-	val-nsec3-keysize-iterations: "<%= @val_nsec3_keysize_iterations.split(/\s+/).join(' ') %>"
+	val-nsec3-keysize-iterations: "<%= @val_nsec3_keysize_iterations.flatten.join(' ') %>"
 <% end -%>
 <% if @add_holddown -%>
 	add-holddown: <%= @add_holddown %>
@@ -345,12 +344,40 @@ server:
 <% end -%>
 <% if @ratelimit_for_domain -%>
 <%   @ratelimit_for_domain.each do |i| -%>
-	ratelimit-for-domain: <%= i.split(/\s+/).join(' ') %>
+	ratelimit-for-domain: <%= i.join(' ') %>
 <%   end -%>
 <% end -%>
 <% if @ratelimit_below_domain -%>
 <%   @ratelimit_below_domain.each do |i| -%>
-	ratelimit-below-domain: <%= i.split(/\s+/).join(' ') %>
+	ratelimit-below-domain: <%= i.join(' ') %>
+<%   end -%>
+<% end -%>
+<% unless @control_enable.nil? -%>
+
+remote-control:
+	control-enable: <%= @control_enable ? 'yes' : 'no' %>
+<%   if @control_interface -%>
+<%     @control_interface.each do |i| -%>
+	control-interface: <%= i %>
+<%     end -%>
+<%   end -%>
+<%   if @control_port -%>
+	control-port: <%= @control_port %>
+<%   end -%>
+<%   unless @control_use_cert.nil? -%>
+	control-use-cert: <%= @control_use_cert ? 'yes' : 'no' %>
+<%   end -%>
+<%   if @server_key_file -%>
+	server-key-file: "<%= @server_key_file %>"
+<%   end -%>
+<%   if @server_cert_file -%>
+	server-cert-file: "<%= @server_cert_file %>"
+<%   end -%>
+<%   if @control_key_file -%>
+	control-key-file: "<%= @control_key_file %>"
+<%   end -%>
+<%   if @control_cert_file -%>
+	control-cert-file: "<%= @control_cert_file %>"
 <%   end -%>
 <% end -%>
 <% unless @control_enable.nil? -%>

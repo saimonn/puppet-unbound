@@ -1,4 +1,4 @@
-#
+# @!visibility private
 class unbound::config {
 
   $access_control               = $::unbound::access_control
@@ -135,7 +135,7 @@ class unbound::config {
     'iterator',
   ])
 
-  case $::osfamily { # lint:ignore:case_without_default
+  case $::osfamily {
     'RedHat': {
       file { '/etc/sysconfig/unbound':
         ensure => absent,
@@ -155,7 +155,7 @@ class unbound::config {
       # updated and runs as the unbound user however it runs the same command
       # as root as an ExecStartPre step in the main unbound service which
       # screws up the file ownership so patch the unit not to do that
-      case $::operatingsystemmajrelease { # lint:ignore:case_without_default
+      case $::operatingsystemmajrelease {
         '7': {
           file { '/etc/systemd/system/unbound.service.d':
             ensure => directory,
@@ -174,9 +174,12 @@ class unbound::config {
             owner   => 0,
             group   => 0,
             mode    => '0644',
-            content => file('unbound/override.conf'),
+            content => file("${module_name}/override.conf"),
             notify  => Exec['systemctl daemon-reload'],
           }
+        }
+        default: {
+          # noop
         }
       }
     }
@@ -187,8 +190,11 @@ class unbound::config {
         owner   => 0,
         group   => 0,
         mode    => '0555',
-        content => file('unbound/unbound'),
+        content => file("${module_name}/unbound"),
       }
+    }
+    default: {
+      # noop
     }
   }
 
@@ -228,7 +234,7 @@ class unbound::config {
       owner   => 0,
       group   => 0,
       mode    => '0644',
-      content => file('unbound/icannbundle.pem'),
+      content => file("${module_name}/icannbundle.pem"),
     }
 
     $exec = "/usr/sbin/unbound-anchor -a ${auto_trust_anchor_file} -c ${conf_dir}/icannbundle.pem"

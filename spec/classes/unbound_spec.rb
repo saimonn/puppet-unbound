@@ -5,8 +5,8 @@ describe 'unbound' do
   let(:params) do
     {
       :outgoing_port => [
-        'avoid 0-32767',
-        'avoid 65001-65535',
+        ['avoid', 0, 32767],
+        ['avoid', 65001, 65535],
       ],
     }
   end
@@ -27,8 +27,6 @@ describe 'unbound' do
         facts
       end
 
-      it { should contain_anchor('unbound::begin') }
-      it { should contain_anchor('unbound::end') }
       it { should contain_class('unbound') }
       it { should contain_class('unbound::config') }
       it { should contain_class('unbound::install') }
