@@ -14,7 +14,6 @@
 # @param first
 #
 # @see puppet_classes::unbound
-# @see puppet_defined_types::unbound::local
 # @see puppet_defined_types::unbound::stub
 define unbound::forward (
   Bodgitlib::Zone                                  $zone  = $title,
@@ -29,7 +28,7 @@ define unbound::forward (
 
   ::concat::fragment { "unbound forward ${zone}":
     content => template("${module_name}/forward.erb"),
-    order   => "40-${zone}",
+    order   => "20-${zone}",
     target  => "${::unbound::conf_dir}/unbound.conf",
   }
 }

@@ -132,7 +132,6 @@
 # @param version
 #
 # @see puppet_defined_types::unbound::forward
-# @see puppet_defined_types::unbound::local
 # @see puppet_defined_types::unbound::stub
 class unbound (
   Stdlib::Absolutepath                                                     $conf_dir                     = $::unbound::params::conf_dir,
