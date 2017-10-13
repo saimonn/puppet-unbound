@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 if Puppet::Util::Package.versioncmp(Puppet.version, '4.4.0') >= 0
-  describe 'test::data::ptr', type: :class do
+  describe 'test::record::ptr', type: :class do
     describe 'accepts PTRs' do
       [
         {
