@@ -2,27 +2,29 @@
 #
 # @example Create a stub zone
 #   ::unbound::stub { 'example.com.':
-#     addr => [
+#     stub_addr => [
 #       '192.0.2.1',
 #       '2001:db8::1',
 #     ],
 #   }
 #
 # @param zone
-# @param host
-# @param addr
-# @param prime
-# @param first
+# @param stub_host
+# @param stub_addr
+# @param stub_prime
+# @param stub_first
+# @param stub_ssl_upstream
 #
 # @see puppet_classes::unbound
 # @see puppet_defined_types::unbound::forward
 # @see puppet_defined_types::unbound::view
 define unbound::stub (
-  Bodgitlib::Zone                                  $zone  = $title,
-  Optional[Array[Bodgitlib::Hostname, 1]]          $host  = undef,
-  Optional[Array[Unbound::Interface::Incoming, 1]] $addr  = undef,
-  Optional[Boolean]                                $prime = undef,
-  Optional[Boolean]                                $first = undef,
+  Bodgitlib::Zone                                  $zone              = $title,
+  Optional[Array[Bodgitlib::Hostname, 1]]          $stub_host         = undef,
+  Optional[Array[Unbound::Interface::Incoming, 1]] $stub_addr         = undef,
+  Optional[Boolean]                                $stub_prime        = undef,
+  Optional[Boolean]                                $stub_first        = undef,
+  Optional[Boolean]                                $stub_ssl_upstream = undef,
 ) {
 
   if ! defined(Class['::unbound']) {

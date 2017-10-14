@@ -7,7 +7,7 @@ describe 'unbound::stub' do
 
   let(:params) do
     {
-      :addr => [
+      :stub_addr => [
         '1.2.3.4',
         ['5.6.7.8', 5353],
       ],

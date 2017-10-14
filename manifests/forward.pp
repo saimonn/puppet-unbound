@@ -2,25 +2,27 @@
 #
 # @example Use Google as forwarders
 #   ::unbound::forward { '.':
-#     addr => [
+#     forward_addr => [
 #       '8.8.8.8',
 #       '8.8.4.4',
 #     ],
 #   }
 #
 # @param zone
-# @param host
-# @param addr
-# @param first
+# @param forward_host
+# @param forward_addr
+# @param forward_first
+# @param forward_ssl_upstream
 #
 # @see puppet_classes::unbound
 # @see puppet_defined_types::unbound::stub
 # @see puppet_defined_types::unbound::view
 define unbound::forward (
-  Bodgitlib::Zone                                  $zone  = $title,
-  Optional[Array[Bodgitlib::Hostname, 1]]          $host  = undef,
-  Optional[Array[Unbound::Interface::Incoming, 1]] $addr  = undef,
-  Optional[Boolean]                                $first = undef,
+  Bodgitlib::Zone                                  $zone                 = $title,
+  Optional[Array[Bodgitlib::Hostname, 1]]          $forward_host         = undef,
+  Optional[Array[Unbound::Interface::Incoming, 1]] $forward_addr         = undef,
+  Optional[Boolean]                                $forward_first        = undef,
+  Optional[Boolean]                                $forward_ssl_upstream = undef,
 ) {
 
   if ! defined(Class['::unbound']) {

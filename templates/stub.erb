@@ -1,19 +1,22 @@
 
 stub-zone:
 	name: "<%= @zone %>"
-<% if @host -%>
-<%   @host.each do |i| -%>
+<% if @stub_host -%>
+<%   @stub_host.each do |i| -%>
 	stub-host: <%= i %>
 <%   end -%>
 <% end -%>
-<% if @addr -%>
-<%   @addr.each do |i| -%>
+<% if @stub_addr -%>
+<%   @stub_addr.each do |i| -%>
 	stub-addr: <%= Array(i).join('@') %>
 <%   end -%>
 <% end -%>
-<% unless @prime.nil? -%>
-	stub-prime: <%= @prime ? 'yes' : 'no' %>
+<% unless @stub_prime.nil? -%>
+	stub-prime: <%= @stub_prime ? 'yes' : 'no' %>
 <% end -%>
-<% unless @first.nil? -%>
-	stub-first: <%= @first ? 'yes' : 'no' %>
+<% unless @stub_first.nil? -%>
+	stub-first: <%= @stub_first ? 'yes' : 'no' %>
+<% end -%>
+<% unless @stub_ssl_upstream.nil? -%>
+	stub-ssl-upstream: <%= @stub_ssl_upstream ? 'yes' : 'no' %>
 <% end -%>
