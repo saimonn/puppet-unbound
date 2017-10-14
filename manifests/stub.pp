@@ -16,6 +16,7 @@
 #
 # @see puppet_classes::unbound
 # @see puppet_defined_types::unbound::forward
+# @see puppet_defined_types::unbound::view
 define unbound::stub (
   Bodgitlib::Zone                                  $zone  = $title,
   Optional[Array[Bodgitlib::Hostname, 1]]          $host  = undef,

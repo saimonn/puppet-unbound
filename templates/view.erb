@@ -1,0 +1,21 @@
+
+view:
+	name: "<%= @view %>"
+<% if @local_zone -%>
+<%   @local_zone.each do |x| -%>
+	local-zone: <%= x.join(' ') %>
+<%   end -%>
+<% end -%>
+<% if @_local_data -%>
+<%   @_local_data.each do |x| -%>
+	local-data: <%= x %>
+<%   end -%>
+<% end -%>
+<% if @local_data_ptr -%>
+<%   @local_data_ptr.each do |x| -%>
+	local-data-ptr: "<%= x['ip'] %><% if x.include?('ttl') %> <%= x['ttl'] %><% end %> <%= x['hostname'] %>"
+<%   end -%>
+<% end -%>
+<% unless @view_first.nil? -%>
+	view-first: <%= @view_first ? 'yes' : 'no' %>
+<% end -%>

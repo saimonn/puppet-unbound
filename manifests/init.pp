@@ -133,6 +133,7 @@
 #
 # @see puppet_defined_types::unbound::forward
 # @see puppet_defined_types::unbound::stub
+# @see puppet_defined_types::unbound::view
 class unbound (
   Stdlib::Absolutepath                                                     $conf_dir                     = $::unbound::params::conf_dir,
   Boolean                                                                  $enable_dns64                 = $::unbound::params::enable_dns64,
