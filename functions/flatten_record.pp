@@ -15,14 +15,20 @@ function unbound::flatten_record(Unbound::Record $value) {
 
   $header = delete_undef_values($value['name', 'ttl', 'class', 'type'])
 
-  $value['type'] ? {
-    'A'     => "\"${join($header + $value['ip'], ' ')}\"",
-    'AAAA'  => "\"${join($header + $value['ip'], ' ')}\"",
-    'MX'    => "\"${join($header + $value['priority', 'hostname'], ' ')}\"",
-    'NS'    => "\"${join($header + $value['hostname'], ' ')}\"",
-    'PTR'   => "\"${join($header + $value['hostname'], ' ')}\"",
-    'SOA'   => "\"${join($header + $value['primary', 'email', 'serial', 'refresh', 'retry', 'expire', 'negative'], ' ')}\"",
-    'TXT'   => "'${join($header + "\"${value['value']}\"", ' ')}'",
+  $record = $value['type'] ? {
+    'A'     => join($header + $value['ip'], ' '),
+    'AAAA'  => join($header + $value['ip'], ' '),
+    'MX'    => join($header + $value['priority', 'hostname'], ' '),
+    'NS'    => join($header + $value['hostname'], ' '),
+    'PTR'   => join($header + $value['hostname'], ' '),
+    'SOA'   => join($header + $value['primary', 'email', 'serial', 'refresh', 'retry', 'expire', 'negative'], ' '),
+    'TXT'   => join($header + "\"${value['value']}\"", ' '),
     default => fail("Unsupported type '${value['type']}'"),
+  }
+
+  # Do this separately so lint doesn't explode
+  $value['type'] ? {
+    'TXT'   => "'${record}'",
+    default => "\"${record}\"",
   }
 }
