@@ -1,12 +1,6 @@
 # @!visibility private
 class unbound::params {
 
-  $control_enable = true
-  $enable_dns64   = false
-  $enable_dnssec  = true
-  $manage_control = true
-  $service_name   = 'unbound'
-
   case $::osfamily {
     'RedHat': {
       $chroot                 = undef

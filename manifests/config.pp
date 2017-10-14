@@ -2,6 +2,10 @@
 class unbound::config {
 
   $access_control               = $::unbound::access_control
+  $access_control_tag           = $::unbound::access_control_tag
+  $access_control_tag_action    = $::unbound::access_control_tag_action
+  $access_control_tag_data      = $::unbound::access_control_tag_data
+  $access_control_view          = $::unbound::access_control_view
   $add_holddown                 = $::unbound::add_holddown
   $auto_trust_anchor_file       = $::unbound::auto_trust_anchor_file
   $cache_max_negative_ttl       = $::unbound::cache_max_negative_ttl
@@ -9,6 +13,8 @@ class unbound::config {
   $cache_min_ttl                = $::unbound::cache_min_ttl
   $caps_whitelist               = $::unbound::caps_whitelist
   $chroot                       = $::unbound::chroot
+  $client_subnet_always_forward = $::unbound::client_subnet_always_forward
+  $client_subnet_zone           = $::unbound::client_subnet_zone
   $conf_dir                     = $::unbound::conf_dir
   $control_cert_file            = $::unbound::control_cert_file
   $control_enable               = $::unbound::control_enable
@@ -16,10 +22,19 @@ class unbound::config {
   $control_key_file             = $::unbound::control_key_file
   $control_port                 = $::unbound::control_port
   $control_use_cert             = $::unbound::control_use_cert
+  $define_tag                   = $::unbound::define_tag
   $del_holddown                 = $::unbound::del_holddown
   $delay_close                  = $::unbound::delay_close
   $directory                    = $::unbound::directory
   $disable_dnssec_lame_check    = $::unbound::disable_dnssec_lame_check
+  $dns64_prefix                 = $::unbound::dns64_prefix
+  $dns64_synthall               = $::unbound::dns64_synthall
+  $dnscrypt_enable              = $::unbound::dnscrypt_enable
+  $dnscrypt_port                = $::unbound::dnscrypt_port
+  $dnscrypt_provider            = $::unbound::dnscrypt_provider
+  $dnscrypt_provider_cert       = $::unbound::dnscrypt_provider_cert
+  $dnscrypt_secret_key          = $::unbound::dnscrypt_secret_key
+  $do_daemonize                 = $::unbound::do_daemonize
   $do_ip4                       = $::unbound::do_ip4
   $do_ip6                       = $::unbound::do_ip6
   $do_not_query_address         = $::unbound::do_not_query_address
@@ -27,8 +42,6 @@ class unbound::config {
   $do_tcp                       = $::unbound::do_tcp
   $do_udp                       = $::unbound::do_udp
   $domain_insecure              = $::unbound::domain_insecure
-  $dns64_prefix                 = $::unbound::dns64_prefix
-  $dns64_synthall               = $::unbound::dns64_synthall
   $edns_buffer_size             = $::unbound::edns_buffer_size
   $extended_statistics          = $::unbound::extended_statistics
   $group                        = $::unbound::group
@@ -40,6 +53,7 @@ class unbound::config {
   $harden_referral_path         = $::unbound::harden_referral_path
   $harden_short_bufsize         = $::unbound::harden_short_bufsize
   $hide_identity                = $::unbound::hide_identity
+  $hide_trustanchor             = $::unbound::hide_trustanchor
   $hide_version                 = $::unbound::hide_version
   $identity                     = $::unbound::identity
   $ignore_cd_flag               = $::unbound::ignore_cd_flag
@@ -52,14 +66,33 @@ class unbound::config {
   $interface                    = $::unbound::interface
   $interface_automatic          = $::unbound::interface_automatic
   $ip_freebind                  = $::unbound::ip_freebind
+  $ip_ratelimit                 = $::unbound::ip_ratelimit
+  $ip_ratelimit_factor          = $::unbound::ip_ratelimit_factor
+  $ip_ratelimit_size            = $::unbound::ip_ratelimit_size
+  $ip_ratelimit_slabs           = $::unbound::ip_ratelimit_slabs
   $ip_transparent               = $::unbound::ip_transparent
+  $ipsecmod_enabled             = $::unbound::ipsecmod_enabled
+  $ipsecmod_hook                = $::unbound::ipsecmod_hook
+  $ipsecmod_ignore_bogus        = $::unbound::ipsecmod_ignore_bogus
+  $ipsecmod_max_ttl             = $::unbound::ipsecmod_max_ttl
+  $ipsecmod_strict              = $::unbound::ipsecmod_strict
+  $ipsecmod_whitelist           = $::unbound::ipsecmod_whitelist
   $jostle_timeout               = $::unbound::jostle_timeout
   $keep_missing                 = $::unbound::keep_missing
   $key_cache_size               = $::unbound::key_cache_size
   $key_cache_slabs              = $::unbound::key_cache_slabs
+  $local_data                   = $::unbound::local_data
+  $local_data_ptr               = $::unbound::local_data_ptr
+  $local_zone                   = $::unbound::local_zone
+  $local_zone_override          = $::unbound::local_zone_override
+  $local_zone_tag               = $::unbound::local_zone_tag
+  $log_identity                 = $::unbound::log_identity
   $log_queries                  = $::unbound::log_queries
+  $log_replies                  = $::unbound::log_replies
   $log_time_ascii               = $::unbound::log_time_ascii
   $logfile                      = $::unbound::logfile
+  $max_client_subnet_ipv4       = $::unbound::max_client_subnet_ipv4
+  $max_client_subnet_ipv6       = $::unbound::max_client_subnet_ipv6
   $max_udp_size                 = $::unbound::max_udp_size
   $minimal_responses            = $::unbound::minimal_responses
   $msg_buffer_size              = $::unbound::msg_buffer_size
@@ -76,11 +109,13 @@ class unbound::config {
   $permit_small_holddown        = $::unbound::permit_small_holddown
   $pidfile                      = $::unbound::pidfile
   $port                         = $::unbound::port
+  $prefer_ip6                   = $::unbound::prefer_ip6
   $prefetch                     = $::unbound::prefetch
   $prefetch_key                 = $::unbound::prefetch_key
   $private_address              = $::unbound::private_address
   $private_domain               = $::unbound::private_domain
   $qname_minimisation           = $::unbound::qname_minimisation
+  $qname_minimisation_strict    = $::unbound::qname_minimisation_strict
   $ratelimit                    = $::unbound::ratelimit
   $ratelimit_below_domain       = $::unbound::ratelimit_below_domain
   $ratelimit_factor             = $::unbound::ratelimit_factor
@@ -91,6 +126,8 @@ class unbound::config {
   $rrset_cache_size             = $::unbound::rrset_cache_size
   $rrset_cache_slabs            = $::unbound::rrset_cache_slabs
   $rrset_roundrobin             = $::unbound::rrset_roundrobin
+  $send_client_subnet           = $::unbound::send_client_subnet
+  $serve_expired                = $::unbound::serve_expired
   $server_cert_file             = $::unbound::server_cert_file
   $server_key_file              = $::unbound::server_key_file
   $so_rcvbuf                    = $::unbound::so_rcvbuf
@@ -107,10 +144,12 @@ class unbound::config {
   $tcp_upstream                 = $::unbound::tcp_upstream
   $trust_anchor                 = $::unbound::trust_anchor
   $trust_anchor_file            = $::unbound::trust_anchor_file
+  $trust_anchor_signaling       = $::unbound::trust_anchor_signaling
   $unblock_lan_zones            = $::unbound::unblock_lan_zones
   $unwanted_reply_threshold     = $::unbound::unwanted_reply_threshold
   $use_caps_for_id              = $::unbound::use_caps_for_id
   $use_syslog                   = $::unbound::use_syslog
+  $use_systemd                  = $::unbound::use_systemd
   $username                     = $::unbound::username
   $val_bogus_ttl                = $::unbound::val_bogus_ttl
   $val_clean_additional         = $::unbound::val_clean_additional
@@ -124,8 +163,17 @@ class unbound::config {
   $version                      = $::unbound::version
 
   $module_config = delete_undef_values([
+    # Not sure of the order if all of these are enabled
     $::unbound::enable_dns64 ? {
       true    => 'dns64',
+      default => undef,
+    },
+    $::unbound::enable_ecs ? {
+      true    => 'subnetcache',
+      default => undef,
+    },
+    $::unbound::enable_ipsec ? {
+      true    => 'ipsecmod',
       default => undef,
     },
     $::unbound::enable_dnssec ? {
@@ -252,6 +300,20 @@ class unbound::config {
       mode    => '0644',
       require => Exec[$exec],
       before  => ::Concat["${conf_dir}/unbound.conf"],
+    }
+  }
+
+  $_access_control_tag_data = $access_control_tag_data ? {
+    undef   => undef,
+    default => $access_control_tag_data.map |$x| {
+      join([$x[0], $x[1], unbound::flatten_record($x[2])], ' ')
+    }
+  }
+
+  $_local_data = $local_data ? {
+    undef   => undef,
+    default => $local_data.map |$x| {
+      unbound::flatten_record($x)
     }
   }
 
