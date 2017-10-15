@@ -180,9 +180,7 @@ server:
 	access-control-view: <%= x.join(' ') %>
 <%   end -%>
 <% end -%>
-<% if @chroot -%>
 	chroot: "<%= @chroot %>"
-<% end -%>
 <% if @username -%>
 	username: "<%= @username %>"
 <% end -%>
@@ -315,7 +313,7 @@ server:
 <%   end -%>
 <% end -%>
 	trusted-keys-file: "<%= @conf_dir %>/keys.d/*.key"
-<% unless @trust_anchor_signaling -%>
+<% unless @trust_anchor_signaling.nil? -%>
 	trust-anchor-signaling: <%= @trust_anchor_signaling ? 'yes' : 'no' %>
 <% end -%>
 <% if @domain_insecure -%>
