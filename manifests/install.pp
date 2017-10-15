@@ -1,4 +1,4 @@
-#
+# @!visibility private
 class unbound::install {
 
   if $::unbound::manage_package {

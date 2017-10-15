@@ -1,16 +1,19 @@
 
 forward-zone:
-	name: "<%= @name %>"
-<% if @host -%>
-<%   @host.each do |i| -%>
+	name: "<%= @zone %>"
+<% if @forward_host -%>
+<%   @forward_host.each do |i| -%>
 	forward-host: <%= i %>
 <%   end -%>
 <% end -%>
-<% if @addr -%>
-<%   @addr.each do |i| -%>
-	forward-addr: <%= i %>
+<% if @forward_addr -%>
+<%   @forward_addr.each do |i| -%>
+	forward-addr: <%= Array(i).join('@') %>
 <%   end -%>
 <% end -%>
-<% if not @first.nil? -%>
-	forward-first: <%= @first == true ? 'yes' : 'no' %>
+<% unless @forward_first.nil? -%>
+	forward-first: <%= @forward_first ? 'yes' : 'no' %>
+<% end -%>
+<% unless @forward_ssl_upstream.nil? -%>
+	forward-ssl-upstream: <%= @forward_ssl_upstream ? 'yes' : 'no' %>
 <% end -%>

@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe 'unbound::stub' do
   let(:title) do
-    'test'
+    'example.com.'
   end
 
   let(:params) do
     {
-      :addr => [
+      :stub_addr => [
         '1.2.3.4',
-        '5.6.7.8@5353',
+        ['5.6.7.8', 5353],
       ],
     }
   end
@@ -30,8 +30,15 @@ describe 'unbound::stub' do
         end
 
         it { should contain_class('unbound') }
-        it { should contain_concat__fragment('unbound stub test') }
-        it { should contain_unbound__stub('test') }
+        it { should contain_concat__fragment('unbound stub example.com.').with_content(<<-EOS.gsub(/^ +/, ''))
+
+          stub-zone:
+          	name: "example.com."
+          	stub-addr: 1.2.3.4
+          	stub-addr: 5.6.7.8@5353
+          EOS
+        }
+        it { should contain_unbound__stub('example.com.') }
       end
     end
   end

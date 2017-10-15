@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe 'unbound::forward' do
   let(:title) do
-    'test'
+    'example.com.'
   end
 
   let(:params) do
     {
-      :addr => [
+      :forward_addr => [
         '1.2.3.4',
-        '5.6.7.8@5353',
+        ['5.6.7.8', 5353],
       ],
     }
   end
@@ -30,8 +30,15 @@ describe 'unbound::forward' do
         end
 
         it { should contain_class('unbound') }
-        it { should contain_concat__fragment('unbound forward test') }
-        it { should contain_unbound__forward('test') }
+        it { should contain_concat__fragment('unbound forward example.com.').with_content(<<-EOS.gsub(/^ +/, ''))
+
+          forward-zone:
+          	name: "example.com."
+          	forward-addr: 1.2.3.4
+          	forward-addr: 5.6.7.8@5353
+          EOS
+        }
+        it { should contain_unbound__forward('example.com.') }
       end
     end
   end

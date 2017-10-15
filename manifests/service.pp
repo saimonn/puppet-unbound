@@ -1,4 +1,4 @@
-#
+# @!visibility private
 class unbound::service {
 
   service { $::unbound::service_name:
