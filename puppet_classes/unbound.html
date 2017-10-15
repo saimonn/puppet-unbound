@@ -1,0 +1,2714 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Puppet Class: unbound
+  
+    &mdash; Documentation by YARD 0.9.9
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "puppet_classes::unbound";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../puppet_class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (u)</a> &raquo;
+    <span class='title'><span class='object_link'>Puppet Classes</span></span>
+     &raquo; 
+    <span class="title">unbound</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="puppet_class_list_link"
+        href="../puppet_class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Puppet Class: unbound</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>::unbound::params</dd>
+  </dl>
+  
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>
+      manifests/init.pp
+    </dd>
+  </dl>
+</div>
+
+<h2>Overview</h2>
+<div class="docstring">
+  <div class="discussion">
+    
+<p>Installs and configures Unbound.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Configure Unbound listening on all interfaces</p>
+</div></p>
+      
+      <pre class="example code"><code>include ::unbound</code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Update the above example to specify the forwarders to use and allow access
+from the local network</p>
+</div></p>
+      
+      <pre class="example code"><code>class { &#39;::unbound&#39;:
+  access_control =&gt; [
+    [&quot;${::network}/${netmask_to_masklen($::netmask)}&quot;, &#39;allow&#39;],
+    [&quot;${::network6}/${netmask_to_masklen($::netmask6)}&quot;, &#39;allow&#39;],
+  ],
+}
+
+::unbound::forward { &#39;.&#39;:
+  forward_addr =&gt; [
+    &#39;8.8.8.8&#39;,
+    &#39;8.8.4.4&#39;,
+    &#39;2001:4860:4860::8844&#39;,
+    &#39;2001:4860:4860::8888&#39;,
+  ],
+}</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>conf_dir</span>
+      
+      
+        <span class='type'>(<tt>Stdlib::Absolutepath</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$::unbound::params::conf_dir</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>enable_dns64</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>enable_dnssec</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>enable_ecs</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>enable_ipsec</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>group</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$::unbound::params::group</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>manage_control</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>manage_package</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$::unbound::params::manage_package</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>package_name</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$::unbound::params::package_name</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;unbound&#39;</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>access_control</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Tuple[IP::Address, Unbound::ACL::Action], 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>access_control_tag</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Tuple[IP::Address, Array[String, 1]], 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>access_control_tag_action</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Tuple[IP::Address, String, Unbound::ACL::Action], 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>access_control_tag_data</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Tuple[IP::Address, String, Unbound::Record], 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>access_control_view</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Tuple[IP::Address, String], 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>add_holddown</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>auto_trust_anchor_file</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$::unbound::params::auto_trust_anchor_file</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cache_max_negative_ttl</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cache_max_ttl</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cache_min_ttl</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>caps_whitelist</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Bodgitlib::Zone::NonRoot, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>chroot</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$::unbound::params::chroot</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_subnet_always_forward</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_subnet_zone</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Bodgitlib::Zone::NonRoot, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>control_cert_file</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$::unbound::params::control_cert_file</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>control_enable</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>control_interface</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Variant[IP::Address::NoSubnet, Stdlib::Absolutepath], 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>control_key_file</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$::unbound::params::control_key_file</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>control_port</span>
+      
+      
+        <span class='type'>(<tt>Optional[Bodgitlib::Port]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>control_use_cert</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>define_tag</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[String, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>del_holddown</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>delay_close</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>directory</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>disable_dnssec_lame_check</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dns64_prefix</span>
+      
+      
+        <span class='type'>(<tt>Optional[IP::Address::V6]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dns64_synthall</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dnscrypt_enable</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dnscrypt_port</span>
+      
+      
+        <span class='type'>(<tt>Optional[Bodgitlib::Port]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dnscrypt_provider</span>
+      
+      
+        <span class='type'>(<tt>Optional[Bodgitlib::Zone::NonRoot]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dnscrypt_provider_cert</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Stdlib::Absolutepath, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>dnscrypt_secret_key</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Stdlib::Absolutepath, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>do_daemonize</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>do_ip4</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>do_ip6</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>do_not_query_address</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[IP::Address, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>do_not_query_localhost</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>do_tcp</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>do_udp</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>domain_insecure</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Bodgitlib::Zone::NonRoot, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>edns_buffer_size</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>extended_statistics</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>harden_algo_downgrade</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>harden_below_nxdomain</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>harden_dnssec_stripped</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>harden_glue</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>harden_large_queries</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>harden_referral_path</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>harden_short_bufsize</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>hide_identity</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>hide_trustanchor</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>hide_version</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>identity</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ignore_cd_flag</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>incoming_num_tcp</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>infra_host_ttl</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>infra_cache_min_rtt</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>infra_cache_numhosts</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>infra_cache_slabs</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>insecure_lan_zones</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interface</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Unbound::Interface::Incoming, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interface_automatic</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ip_freebind</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ip_ratelimit</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ip_ratelimit_factor</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ip_ratelimit_size</span>
+      
+      
+        <span class='type'>(<tt>Optional[Unbound::Size]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ip_ratelimit_slabs</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ip_transparent</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ipsecmod_enabled</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ipsecmod_hook</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ipsecmod_ignore_bogus</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ipsecmod_max_ttl</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ipsecmod_strict</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ipsecmod_whitelist</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Bodgitlib::Zone::NonRoot, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>jostle_timeout</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>keep_missing</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>key_cache_size</span>
+      
+      
+        <span class='type'>(<tt>Optional[Unbound::Size]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>key_cache_slabs</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>local_data</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Unbound::Record, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>local_data_ptr</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Unbound::Record::PTR, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>local_zone</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Tuple[Bodgitlib::Zone::NonRoot, Unbound::Type], 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>local_zone_override</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Tuple[Bodgitlib::Zone::NonRoot, IP::Address, Unbound::Type], 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>local_zone_tag</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Tuple[Bodgitlib::Zone::NonRoot, Array[String, 1]], 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>log_identity</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>log_queries</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>log_replies</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>log_time_ascii</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>logfile</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_client_subnet_ipv4</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0, 32]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_client_subnet_ipv6</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0, 128]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_udp_size</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0, 65536]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>minimal_responses</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>msg_buffer_size</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0, 65552]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>msg_cache_size</span>
+      
+      
+        <span class='type'>(<tt>Optional[Unbound::Size]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>msg_cache_slabs</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>neg_cache_size</span>
+      
+      
+        <span class='type'>(<tt>Optional[Unbound::Size]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_queries_per_thread</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>num_threads</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>outgoing_interface</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Unbound::Interface::Outgoing, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>outgoing_num_tcp</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>outgoing_port</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Unbound::Port, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>outgoing_range</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[1, 65535]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>outgoing_tcp_mss</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>permit_small_holddown</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>pidfile</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>port</span>
+      
+      
+        <span class='type'>(<tt>Optional[Bodgitlib::Port]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prefer_ip6</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prefetch</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prefetch_key</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>private_address</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[IP::Address, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>private_domain</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Bodgitlib::Zone::NonRoot, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>qname_minimisation</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>qname_minimisation_strict</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ratelimit</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ratelimit_below_domain</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Unbound::RateLimit, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ratelimit_factor</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ratelimit_for_domain</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Unbound::RateLimit, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ratelimit_size</span>
+      
+      
+        <span class='type'>(<tt>Optional[Unbound::Size]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ratelimit_slabs</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>root_hints</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rrset_cache_size</span>
+      
+      
+        <span class='type'>(<tt>Optional[Unbound::Size]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rrset_cache_slabs</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>rrset_roundrobin</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>send_client_subnet</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[IP::Address, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>serve_expired</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>server_cert_file</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$::unbound::params::server_cert_file</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>server_key_file</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$::unbound::params::server_key_file</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>so_rcvbuf</span>
+      
+      
+        <span class='type'>(<tt>Optional[Unbound::Size]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>so_reuseport</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>so_sndbuf</span>
+      
+      
+        <span class='type'>(<tt>Optional[Unbound::Size]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ssl_port</span>
+      
+      
+        <span class='type'>(<tt>Optional[Bodgitlib::Port]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ssl_service_key</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ssl_service_pem</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ssl_upstream</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>statistics_cumulative</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>statistics_interval</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>target_fetch_policy</span>
+      
+      
+        <span class='type'>(<tt>Optional[Tuple[Integer[-1], 5]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tcp_mss</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>tcp_upstream</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>trust_anchor</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[String, 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>trust_anchor_file</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>trust_anchor_signaling</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>unblock_lan_zones</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>unwanted_reply_threshold</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>use_caps_for_id</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>use_syslog</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>use_systemd</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>username</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$::unbound::params::username</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>val_bogus_ttl</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>val_clean_additional</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>val_log_level</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0, 2]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>val_nsec3_keysize_iterations</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[Tuple[Integer[0], 2], 1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>val_override_date</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>val_permissive_mode</span>
+      
+      
+        <span class='type'>(<tt>Optional[Boolean]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>val_sig_skew_max</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>val_sig_skew_min</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>verbosity</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer[0, 5]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>version</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="../puppet_defined_types/unbound_3A_3Aforward.html" title="puppet_defined_types::unbound::forward (puppet_defined_type)">puppet_defined_types::unbound::forward</a></span></li>
+    
+      <li><span class='object_link'><a href="../puppet_defined_types/unbound_3A_3Astub.html" title="puppet_defined_types::unbound::stub (puppet_defined_type)">puppet_defined_types::unbound::stub</a></span></li>
+    
+      <li><span class='object_link'><a href="../puppet_defined_types/unbound_3A_3Aview.html" title="puppet_defined_types::unbound::view (puppet_defined_type)">puppet_defined_types::unbound::view</a></span></li>
+    
+  </ul>
+
+</div><div class="method_details_list">
+  <table class="source_code">
+    <tr>
+      <td>
+        <pre class="lines">
+
+
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377</pre>
+      </td>
+      <td>
+        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 195</span>
+
+class unbound (
+  Stdlib::Absolutepath                                                            $conf_dir                     = $::unbound::params::conf_dir,
+  Boolean                                                                         $enable_dns64                 = false,
+  Boolean                                                                         $enable_dnssec                = true,
+  Boolean                                                                         $enable_ecs                   = false,
+  Boolean                                                                         $enable_ipsec                 = false,
+  String                                                                          $group                        = $::unbound::params::group,
+  Boolean                                                                         $manage_control               = true,
+  Boolean                                                                         $manage_package               = $::unbound::params::manage_package,
+  Optional[String]                                                                $package_name                 = $::unbound::params::package_name,
+  String                                                                          $service_name                 = &#39;unbound&#39;,
+  # Below map to global configuration parameters
+  Optional[Array[Tuple[IP::Address, Unbound::ACL::Action], 1]]                    $access_control               = undef,
+  Optional[Array[Tuple[IP::Address, Array[String, 1]], 1]]                        $access_control_tag           = undef,
+  Optional[Array[Tuple[IP::Address, String, Unbound::ACL::Action], 1]]            $access_control_tag_action    = undef,
+  Optional[Array[Tuple[IP::Address, String, Unbound::Record], 1]]                 $access_control_tag_data      = undef,
+  Optional[Array[Tuple[IP::Address, String], 1]]                                  $access_control_view          = undef,
+  Optional[Integer[0]]                                                            $add_holddown                 = undef,
+  Optional[Stdlib::Absolutepath]                                                  $auto_trust_anchor_file       = $::unbound::params::auto_trust_anchor_file,
+  Optional[Integer[0]]                                                            $cache_max_negative_ttl       = undef,
+  Optional[Integer[0]]                                                            $cache_max_ttl                = undef,
+  Optional[Integer[0]]                                                            $cache_min_ttl                = undef,
+  Optional[Array[Bodgitlib::Zone::NonRoot, 1]]                                    $caps_whitelist               = undef,
+  Optional[Stdlib::Absolutepath]                                                  $chroot                       = $::unbound::params::chroot,
+  Optional[Boolean]                                                               $client_subnet_always_forward = undef,
+  Optional[Array[Bodgitlib::Zone::NonRoot, 1]]                                    $client_subnet_zone           = undef,
+  Optional[Stdlib::Absolutepath]                                                  $control_cert_file            = $::unbound::params::control_cert_file,
+  Optional[Boolean]                                                               $control_enable               = true,
+  Optional[Array[Variant[IP::Address::NoSubnet, Stdlib::Absolutepath], 1]]        $control_interface            = undef,
+  Optional[Stdlib::Absolutepath]                                                  $control_key_file             = $::unbound::params::control_key_file,
+  Optional[Bodgitlib::Port]                                                       $control_port                 = undef,
+  Optional[Boolean]                                                               $control_use_cert             = undef,
+  Optional[Array[String, 1]]                                                      $define_tag                   = undef,
+  Optional[Integer[0]]                                                            $del_holddown                 = undef,
+  Optional[Integer[0]]                                                            $delay_close                  = undef,
+  Optional[Stdlib::Absolutepath]                                                  $directory                    = undef,
+  Optional[Boolean]                                                               $disable_dnssec_lame_check    = undef,
+  Optional[IP::Address::V6]                                                       $dns64_prefix                 = undef,
+  Optional[Boolean]                                                               $dns64_synthall               = undef,
+  Optional[Boolean]                                                               $dnscrypt_enable              = undef,
+  Optional[Bodgitlib::Port]                                                       $dnscrypt_port                = undef,
+  Optional[Bodgitlib::Zone::NonRoot]                                              $dnscrypt_provider            = undef,
+  Optional[Array[Stdlib::Absolutepath, 1]]                                        $dnscrypt_provider_cert       = undef,
+  Optional[Array[Stdlib::Absolutepath, 1]]                                        $dnscrypt_secret_key          = undef,
+  Optional[Boolean]                                                               $do_daemonize                 = undef,
+  Optional[Boolean]                                                               $do_ip4                       = undef,
+  Optional[Boolean]                                                               $do_ip6                       = undef,
+  Optional[Array[IP::Address, 1]]                                                 $do_not_query_address         = undef,
+  Optional[Boolean]                                                               $do_not_query_localhost       = undef,
+  Optional[Boolean]                                                               $do_tcp                       = undef,
+  Optional[Boolean]                                                               $do_udp                       = undef,
+  Optional[Array[Bodgitlib::Zone::NonRoot, 1]]                                    $domain_insecure              = undef,
+  Optional[Integer[0]]                                                            $edns_buffer_size             = undef,
+  Optional[Boolean]                                                               $extended_statistics          = undef,
+  Optional[Boolean]                                                               $harden_algo_downgrade        = undef,
+  Optional[Boolean]                                                               $harden_below_nxdomain        = undef,
+  Optional[Boolean]                                                               $harden_dnssec_stripped       = undef,
+  Optional[Boolean]                                                               $harden_glue                  = undef,
+  Optional[Boolean]                                                               $harden_large_queries         = undef,
+  Optional[Boolean]                                                               $harden_referral_path         = undef,
+  Optional[Boolean]                                                               $harden_short_bufsize         = undef,
+  Optional[Boolean]                                                               $hide_identity                = undef,
+  Optional[Boolean]                                                               $hide_trustanchor             = undef,
+  Optional[Boolean]                                                               $hide_version                 = undef,
+  Optional[String]                                                                $identity                     = undef,
+  Optional[Boolean]                                                               $ignore_cd_flag               = undef,
+  Optional[Integer[0]]                                                            $incoming_num_tcp             = undef,
+  Optional[Integer[0]]                                                            $infra_host_ttl               = undef,
+  Optional[Integer[0]]                                                            $infra_cache_min_rtt          = undef,
+  Optional[Integer[0]]                                                            $infra_cache_numhosts         = undef,
+  Optional[Integer[1]]                                                            $infra_cache_slabs            = undef,
+  Optional[Boolean]                                                               $insecure_lan_zones           = undef,
+  Optional[Array[Unbound::Interface::Incoming, 1]]                                $interface                    = undef,
+  Optional[Boolean]                                                               $interface_automatic          = undef,
+  Optional[Boolean]                                                               $ip_freebind                  = undef,
+  Optional[Integer[0]]                                                            $ip_ratelimit                 = undef,
+  Optional[Integer[0]]                                                            $ip_ratelimit_factor          = undef,
+  Optional[Unbound::Size]                                                         $ip_ratelimit_size            = undef,
+  Optional[Integer[1]]                                                            $ip_ratelimit_slabs           = undef,
+  Optional[Boolean]                                                               $ip_transparent               = undef,
+  Optional[Boolean]                                                               $ipsecmod_enabled             = undef,
+  Optional[Stdlib::Absolutepath]                                                  $ipsecmod_hook                = undef,
+  Optional[Boolean]                                                               $ipsecmod_ignore_bogus        = undef,
+  Optional[Integer[0]]                                                            $ipsecmod_max_ttl             = undef,
+  Optional[Boolean]                                                               $ipsecmod_strict              = undef,
+  Optional[Array[Bodgitlib::Zone::NonRoot, 1]]                                    $ipsecmod_whitelist           = undef,
+  Optional[Integer[0]]                                                            $jostle_timeout               = undef,
+  Optional[Integer[0]]                                                            $keep_missing                 = undef,
+  Optional[Unbound::Size]                                                         $key_cache_size               = undef,
+  Optional[Integer[1]]                                                            $key_cache_slabs              = undef,
+  Optional[Array[Unbound::Record, 1]]                                             $local_data                   = undef,
+  Optional[Array[Unbound::Record::PTR, 1]]                                        $local_data_ptr               = undef,
+  Optional[Array[Tuple[Bodgitlib::Zone::NonRoot, Unbound::Type], 1]]              $local_zone                   = undef,
+  Optional[Array[Tuple[Bodgitlib::Zone::NonRoot, IP::Address, Unbound::Type], 1]] $local_zone_override          = undef,
+  Optional[Array[Tuple[Bodgitlib::Zone::NonRoot, Array[String, 1]], 1]]           $local_zone_tag               = undef,
+  Optional[String]                                                                $log_identity                 = undef,
+  Optional[Boolean]                                                               $log_queries                  = undef,
+  Optional[Boolean]                                                               $log_replies                  = undef,
+  Optional[Boolean]                                                               $log_time_ascii               = undef,
+  Optional[Stdlib::Absolutepath]                                                  $logfile                      = undef,
+  Optional[Integer[0, 32]]                                                        $max_client_subnet_ipv4       = undef,
+  Optional[Integer[0, 128]]                                                       $max_client_subnet_ipv6       = undef,
+  Optional[Integer[0, 65536]]                                                     $max_udp_size                 = undef,
+  Optional[Boolean]                                                               $minimal_responses            = undef,
+  Optional[Integer[0, 65552]]                                                     $msg_buffer_size              = undef,
+  Optional[Unbound::Size]                                                         $msg_cache_size               = undef,
+  Optional[Integer[1]]                                                            $msg_cache_slabs              = undef,
+  Optional[Unbound::Size]                                                         $neg_cache_size               = undef,
+  Optional[Integer[0]]                                                            $num_queries_per_thread       = undef,
+  Optional[Integer[1]]                                                            $num_threads                  = undef,
+  Optional[Array[Unbound::Interface::Outgoing, 1]]                                $outgoing_interface           = undef,
+  Optional[Integer[0]]                                                            $outgoing_num_tcp             = undef,
+  Optional[Array[Unbound::Port, 1]]                                               $outgoing_port                = undef,
+  Optional[Integer[1, 65535]]                                                     $outgoing_range               = undef,
+  Optional[Integer[0]]                                                            $outgoing_tcp_mss             = undef,
+  Optional[Boolean]                                                               $permit_small_holddown        = undef,
+  Optional[Stdlib::Absolutepath]                                                  $pidfile                      = undef,
+  Optional[Bodgitlib::Port]                                                       $port                         = undef,
+  Optional[Boolean]                                                               $prefer_ip6                   = undef,
+  Optional[Boolean]                                                               $prefetch                     = undef,
+  Optional[Boolean]                                                               $prefetch_key                 = undef,
+  Optional[Array[IP::Address, 1]]                                                 $private_address              = undef,
+  Optional[Array[Bodgitlib::Zone::NonRoot, 1]]                                    $private_domain               = undef,
+  Optional[Boolean]                                                               $qname_minimisation           = undef,
+  Optional[Boolean]                                                               $qname_minimisation_strict    = undef,
+  Optional[Integer[0]]                                                            $ratelimit                    = undef,
+  Optional[Array[Unbound::RateLimit, 1]]                                          $ratelimit_below_domain       = undef,
+  Optional[Integer[0]]                                                            $ratelimit_factor             = undef,
+  Optional[Array[Unbound::RateLimit, 1]]                                          $ratelimit_for_domain         = undef,
+  Optional[Unbound::Size]                                                         $ratelimit_size               = undef,
+  Optional[Integer[1]]                                                            $ratelimit_slabs              = undef,
+  Optional[Stdlib::Absolutepath]                                                  $root_hints                   = undef,
+  Optional[Unbound::Size]                                                         $rrset_cache_size             = undef,
+  Optional[Integer[1]]                                                            $rrset_cache_slabs            = undef,
+  Optional[Boolean]                                                               $rrset_roundrobin             = undef,
+  Optional[Array[IP::Address, 1]]                                                 $send_client_subnet           = undef,
+  Optional[Boolean]                                                               $serve_expired                = undef,
+  Optional[Stdlib::Absolutepath]                                                  $server_cert_file             = $::unbound::params::server_cert_file,
+  Optional[Stdlib::Absolutepath]                                                  $server_key_file              = $::unbound::params::server_key_file,
+  Optional[Unbound::Size]                                                         $so_rcvbuf                    = undef,
+  Optional[Boolean]                                                               $so_reuseport                 = undef,
+  Optional[Unbound::Size]                                                         $so_sndbuf                    = undef,
+  Optional[Bodgitlib::Port]                                                       $ssl_port                     = undef,
+  Optional[Stdlib::Absolutepath]                                                  $ssl_service_key              = undef,
+  Optional[Stdlib::Absolutepath]                                                  $ssl_service_pem              = undef,
+  Optional[Boolean]                                                               $ssl_upstream                 = undef,
+  Optional[Boolean]                                                               $statistics_cumulative        = undef,
+  Optional[Integer[0]]                                                            $statistics_interval          = undef,
+  Optional[Tuple[Integer[-1], 5]]                                                 $target_fetch_policy          = undef,
+  Optional[Integer[0]]                                                            $tcp_mss                      = undef,
+  Optional[Boolean]                                                               $tcp_upstream                 = undef,
+  Optional[Array[String, 1]]                                                      $trust_anchor                 = undef,
+  Optional[Stdlib::Absolutepath]                                                  $trust_anchor_file            = undef,
+  Optional[Boolean]                                                               $trust_anchor_signaling       = undef,
+  Optional[Boolean]                                                               $unblock_lan_zones            = undef,
+  Optional[Integer[0]]                                                            $unwanted_reply_threshold     = undef,
+  Optional[Boolean]                                                               $use_caps_for_id              = undef,
+  Optional[Boolean]                                                               $use_syslog                   = undef,
+  Optional[Boolean]                                                               $use_systemd                  = undef,
+  Optional[String]                                                                $username                     = $::unbound::params::username,
+  Optional[Integer[0]]                                                            $val_bogus_ttl                = undef,
+  Optional[Boolean]                                                               $val_clean_additional         = undef,
+  Optional[Integer[0, 2]]                                                         $val_log_level                = undef,
+  Optional[Array[Tuple[Integer[0], 2], 1]]                                        $val_nsec3_keysize_iterations = undef,
+  Optional[String]                                                                $val_override_date            = undef,
+  Optional[Boolean]                                                               $val_permissive_mode          = undef,
+  Optional[Integer[0]]                                                            $val_sig_skew_max             = undef,
+  Optional[Integer[0]]                                                            $val_sig_skew_min             = undef,
+  Optional[Integer[0, 5]]                                                         $verbosity                    = undef,
+  Optional[String]                                                                $version                      = undef,
+) inherits ::unbound::params {
+
+  if $manage_control and ($control_cert_file != $::unbound::params::control_cert_file or $control_key_file != $::unbound::params::control_key_file or $server_cert_file != $::unbound::params::server_cert_file or $server_key_file != $::unbound::params::server_key_file) {
+    fail(&#39;Cannot have $manage_control enabled with non-standard locations for remote control keys and/or certificates&#39;)
+  }
+
+  contain ::unbound::install
+  contain ::unbound::config
+  contain ::unbound::service
+
+  Class[&#39;::unbound::install&#39;] ~&gt; Class[&#39;::unbound::config&#39;]
+    ~&gt; Class[&#39;::unbound::service&#39;]
+}</pre>
+      </td>
+    </tr>
+  </table>
+</div>
+</div>
+
+      <div id="footer">
+  Generated on Sun Oct 15 21:20:40 2017 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.9 (ruby-2.2.5).
+</div>
+
+    </div>
+  </body>
+</html>
