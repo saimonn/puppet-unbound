@@ -19,6 +19,15 @@ class unbound::params {
         }
       }
     }
+    'Debian': {
+      $chroot                 = undef
+      $conf_dir               = '/etc/unbound'
+      $group                  = 'unbound'
+      $manage_package         = true
+      $package_name           = 'unbound'
+      $username               = 'unbound'
+      $auto_trust_anchor_file = '/var/lib/unbound/root.key'
+    }
     'OpenBSD': {
       $chroot                 = '/var/unbound'
       $auto_trust_anchor_file = "${chroot}/db/root.key"
